@@ -34,15 +34,41 @@ enum Role {
      price       Float
      rating      Float
      genre       String
-     // Add other movie fields (cover image URL, director, etc.)
-     // ...
+   
    }
 
+  model Order {
+     id           Int      @id @default(autoincrement())
+     userId       String
+     orderdate    Float
+  
+       
+   }
+
+
    model Cart {
-     id     Int      @id @default(autoincrement())
-     userId Int
-     movieId Int
+     id       Int      @id @default(autoincrement())
+     userId   Int
+     movieId  Int
      quantity Int
    }
+
+  model OrderItem {
+     id           Int      @id @default(autoincrement())
+     orderId      String
+     movieId      String
+     quantity     String
+     totalPrice   Float
+     
+       
+   }
+
+  model MovieRating {
+     id       Int      @id @default(autoincrement())
+     userId   Int
+     movieId  Int
+     rating   Float
+   }
+
 
 
