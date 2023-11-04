@@ -10,31 +10,39 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id          String @id @default(uuid())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  email       String  @unique
-  name        String?
-  image       String?
-  role        Role @default(USER)
-  bookmarks   Link[]
+model Profile {
+  id           Int        @id @default(autoincrement())
+  name         String     @db.VarChar(50)
+  email        String     @unique @db.VarChar(50)
+  phone        String     @db.VarChar(50)
+  password     String     @db.VarChar(255)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  role         Role       @default(user)
+  
 }
 
 enum Role {
-  ADMIN
-  USER
+  admin
+  user
 }
 
-model Link {
-  id            String  @id @default(uuid())
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  title         String
-  description   String
-  url           String
-  image         String
-  role          String
-  users         User[]
- 
-}
+   model Movie {
+     id          Int      @id @default(autoincrement())
+     title       String
+     description String
+     price       Float
+     rating      Float
+     genre       String
+     // Add other movie fields (cover image URL, director, etc.)
+     // ...
+   }
+
+   model Cart {
+     id     Int      @id @default(autoincrement())
+     userId Int
+     movieId Int
+     quantity Int
+   }
+
+
