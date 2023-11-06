@@ -9,8 +9,6 @@ const app = express();
 
 app.use(bodyParser.json());
 
-// Route for user registration (you can use the same registration route as in the previous example)
-// ...
 
 // Route for user login
 app.use('/auth', authRoutes);
@@ -30,17 +28,3 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
-
-// define async function to send queries to DB
-async function getUsers() {
-  try {
-    const users = await prisma.profile.findMany();
-    console.log(users);
-  } catch (error) {
-    console.error(error);
-  } finally {
-    await prisma.$disconnect();
-  }
-}
-
-getUsers();

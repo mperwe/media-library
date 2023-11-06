@@ -8,7 +8,7 @@ function authMiddleware(req, res, next) {
   }
 
   try {
-    const decoded = jwt.verify(token, 'admin@123');
+    const decoded = jwt.verify(token, 'your-secret-key');
     req.user = decoded;
     next();
   } catch (error) {
