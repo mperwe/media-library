@@ -21,4 +21,29 @@ router.post('/login', (req, res) => {
   res.json({ token });
 });
 
+ // Define a route for user registration
+router.post('/register', async (req, res) => {
+    try {
+      const { username, email, password } = req.body;
+  
+      // Create a new user in the database using Prisma
+      const user = await prisma.user.create({
+        data: {
+          username,
+          email,
+          password,
+        },
+      });
+  
+      res.status(201).json({ message: 'User registered successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'An error occurred while registering the user' });
+    }
+  });
+  
+
+
+
+
 module.exports = router;
