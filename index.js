@@ -1,25 +1,18 @@
 const express = require('express');
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
-
 const bodyParser = require('body-parser');
 const authRoutes = require('./v1/routes/auth');
-const authMiddleware = require('./v1/middleware/authMiddleware');
+const profileRoutes = require('./v1/routes/profile');
+const userRoutes = require('./v1/routes/users');
 const app = express();
 
+// Body parsing middleware
 app.use(bodyParser.json());
-
-
 // Route for user login
 app.use('/auth', authRoutes);
-
-// Protected route (requires a valid JWT)
-app.get('/protected', authMiddleware, (req, res) => {
-  res.json({ message: 'You have access to this protected route!' });
-});
+app.use('/profile', profileRoutes);
+app.use('/users', userRoutes);
 
 const port = 4100;
-
 
 app.get('/', (req, res) => {
   res.send('Media Libray Server connecting!');
