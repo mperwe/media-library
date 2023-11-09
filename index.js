@@ -1,9 +1,8 @@
 // my index.js file
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const authRoute = require('./v1/routes/authRoute');
-
+const moviesRoute = require('./v1/routes/movieRoute');
 
 const app = express();
 const port = 4100;
@@ -18,6 +17,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.use('/auth', authRoute);
+app.use('/movies', moviesRoute);
 
 // Start server
 app.listen(port, () => {
