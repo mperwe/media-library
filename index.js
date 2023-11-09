@@ -1,23 +1,25 @@
+// my index.js file
+
 const express = require('express');
 const bodyParser = require('body-parser');
-const authRoutes = require('./v1/routes/auth');
-const profileRoutes = require('./v1/routes/profile');
-const userRoutes = require('./v1/routes/users');
+const authRoute = require('./v1/routes/authRoute');
+
+
 const app = express();
-
-// Body parsing middleware
-app.use(bodyParser.json());
-// Route for user login
-app.use('/auth', authRoutes);
-app.use('/profile', profileRoutes);
-app.use('/users', userRoutes);
-
 const port = 4100;
 
-app.get('/', (req, res) => {
-  res.send('Media Libray Server connecting!');
-});
+// Import and use the protected route
+const protectedRoute = require('./v1/routes/protectedRoute');
 
+app.use('/api', protectedRoute);
+
+// Middleware
+app.use(bodyParser.json());
+
+// Routes
+app.use('/auth', authRoute);
+
+// Start server
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+    console.log(`Server is running on port ${port}`);
 });
