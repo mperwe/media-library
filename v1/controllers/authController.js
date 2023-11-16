@@ -3,6 +3,7 @@
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const authModel = require('../models/authModel');
+const JWT_SECRET_KEY=process.env.JWT_SECRET_KEY
 
 const registrationSchema = Joi.object({
     email: Joi.string().email().required(),
@@ -22,7 +23,7 @@ const authController = {
                 return res.status(401).json({ message: 'Invalid credentials' });
             }
 
-            const token = jwt.sign({ email }, 'your-secret-key', { expiresIn: '1h' });
+            const token = jwt.sign({ email }, `${JWT_SECRET_KEY}`, { expiresIn: '1h' });
             res.json({ token });
         } catch (error) {
             console.error(error);
@@ -38,9 +39,7 @@ const authController = {
             }
 
             const { username, email, password } = req.body;
-
             const existingUser = await authModel.getUserByEmail(email);
-
             if (existingUser) {
                 return res.status(409).json({ error: 'User exists' });
             } else {
@@ -50,11 +49,9 @@ const authController = {
                     password,
                     role: 'user',
                 });
-
                 res.status(201).json({ message: 'User registered successfully' });
             }
         } catch (error) {
-            console.error(error);
             res.status(500).json({ error: 'An error occurred while registering the user' });
         }
     },
