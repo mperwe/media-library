@@ -11,15 +11,13 @@ datasource db {
 }
 
 model Profile {
-  id           Int        @id @default(autoincrement())
-  name         String     @db.VarChar(50)
-  email        String     @unique @db.VarChar(50)
-  phone        String     @db.VarChar(50)
-  password     String     @db.VarChar(255)
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-  role         Role       @default(user)
-  
+  id        Int      @id @default(autoincrement())
+  username  String   @db.VarChar(50)
+  email     String   @unique @db.VarChar(50)
+  password  String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  role      Role     @default(user)
 }
 
 enum Role {
@@ -27,48 +25,39 @@ enum Role {
   user
 }
 
-   model Movie {
-     id          Int      @id @default(autoincrement())
-     title       String
-     description String
-     price       Float
-     rating      Float
-     genre       String
-   
-   }
+model Movie {
+  id          Int    @id @default(autoincrement())
+  title       String
+  description String
+  price       Float
+  rating      Float
+  genre       String
+}
 
-  model Order {
-     id           Int      @id @default(autoincrement())
-     userId       String
-     orderdate    Float
-  
-       
-   }
+model Order {
+  id        Int    @id @default(autoincrement())
+  userId    String
+  orderdate Float
+}
 
+model Cart {
+  id       Int @id @default(autoincrement())
+  userId   Int
+  movieId  Int
+  quantity Int
+}
 
-   model Cart {
-     id       Int      @id @default(autoincrement())
-     userId   Int
-     movieId  Int
-     quantity Int
-   }
+model OrderItem {
+  id         Int    @id @default(autoincrement())
+  orderId    String
+  movieId    String
+  quantity   String
+  totalPrice Float
+}
 
-  model OrderItem {
-     id           Int      @id @default(autoincrement())
-     orderId      String
-     movieId      String
-     quantity     String
-     totalPrice   Float
-     
-       
-   }
-
-  model MovieRating {
-     id       Int      @id @default(autoincrement())
-     userId   Int
-     movieId  Int
-     rating   Float
-   }
-
-
-
+model MovieRating {
+  id      Int   @id @default(autoincrement())
+  userId  Int
+  movieId Int
+  rating  Float
+}
