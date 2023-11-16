@@ -7,9 +7,7 @@ const authModel = require('../models/authModel');
 const registrationSchema = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().required(),
-    name: Joi.string().required(),
-    phone: Joi.string().required(),
-    role: Joi.string().required(),
+    username: Joi.string().required(),
 });
 
 const authController = {
@@ -39,7 +37,7 @@ const authController = {
                 return res.status(400).json({ error: error.details[0].message });
             }
 
-            const { username, email, password, name, phone, role } = req.body;
+            const { username, email, password } = req.body;
 
             const existingUser = await authModel.getUserByEmail(email);
 
@@ -50,9 +48,7 @@ const authController = {
                     username,
                     email,
                     password,
-                    name,
-                    phone,
-                    role,
+                    role: 'user',
                 });
 
                 res.status(201).json({ message: 'User registered successfully' });
