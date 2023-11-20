@@ -32,6 +32,8 @@ model Movie {
   price       Float
   rating      Float
   genre       String
+  year        Int
+  imageUrl    String
 }
 
 model Order {

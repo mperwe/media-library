@@ -49,7 +49,8 @@ const authController = {
                     password,
                     role: 'user',
                 });
-                res.status(201).json({ message: 'User registered successfully' });
+                const token = jwt.sign({ email }, `${JWT_SECRET_KEY}`, { expiresIn: '1h' });
+                res.status(201).json({ message: 'User registered successfully', token });
             }
         } catch (error) {
             res.status(500).json({ error: 'An error occurred while registering the user' });
