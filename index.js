@@ -22,10 +22,10 @@ app.use('/movies', moviesRoute);
 
 // Welcome Route
 app.get('/', (req, res) => {
-    res.send('Welcome to the Movie Library!');
-  });
+  res.send('Welcome to the Movie Library!');
+});
 
 // Start server
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+  console.log(`Server is running on port ${port}`);
 });
