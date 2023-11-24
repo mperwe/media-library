@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 const getAllMovies = async (req, res) => {
     try {
         const movies = await prisma.movie.findMany();
-       
+
         res.json(movies);
     } catch (error) {
         res.status(500).json({ error: 'Internal Server Error' });
@@ -57,7 +57,6 @@ const updateMovie = async (req, res) => {
     }
 };
 
-// controllers/moviesController.js
 const deleteMovie = async (req, res) => {
     try {
         const deletedMovie = await prisma.movie.delete({

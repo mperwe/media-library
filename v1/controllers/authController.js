@@ -3,7 +3,7 @@
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const authModel = require('../models/authModel');
-const JWT_SECRET_KEY=process.env.JWT_SECRET_KEY
+const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY
 
 const registrationSchema = Joi.object({
     email: Joi.string().email().required(),
