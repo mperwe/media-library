@@ -5,7 +5,6 @@ const prisma = new PrismaClient();
 const getAllMovies = async (req, res) => {
     try {
         const movies = await prisma.movie.findMany();
-
         res.json(movies);
     } catch (error) {
         res.status(500).json({ error: 'Internal Server Error' });
@@ -25,6 +24,7 @@ const getMovieById = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
+
 const createMovie = async (req, res) => {
     const { title } = req.body;
 
@@ -71,10 +71,34 @@ const deleteMovie = async (req, res) => {
     }
 };
 
+const searchMovie = async (req, res) => {
+    try {
+        const { search } = req.query;
+
+        if (!search) {
+            return res.status(400).json({ error: 'Search query is required' });
+        }
+
+        const movies = await prisma.movie.findMany({
+            where: {
+                title: {
+                    contains: search,
+                    mode: 'insensitive', 
+                },
+            },
+        });
+
+        res.json(movies);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
 module.exports = {
     getAllMovies,
     getMovieById,
     createMovie,
     updateMovie,
     deleteMovie,
+    searchMovie,
 };
