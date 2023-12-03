@@ -13,9 +13,11 @@ const getAllMovies = async (req, res) => {
 
 const getMovieById = async (req, res) => {
     try {
+        console.log('req', req.params)
         const movie = await prisma.movie.findUnique({
             where: { id: parseInt(req.params.id) },
         });
+        console.log('movie', movie)
         if (!movie) {
             return res.status(404).json({ error: 'Movie not found' });
         }
