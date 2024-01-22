@@ -29,7 +29,7 @@ model Movie {
   id          Int    @id @default(autoincrement())
   title       String
   description String
-  price       Float
+  price       String
   rating      Float
   genre       String
   year        Int
