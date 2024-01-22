@@ -2,14 +2,14 @@
 const express = require('express');
 const cors = require('cors')
 const bodyParser = require('body-parser');
-const authRoute = require('./v1/routes/authRoute');
-const moviesRoute = require('./v1/routes/movieRoute');
+const authRoute = require('./routes/authRoute');
+const moviesRoute = require('./routes/movieRoute');
 
 const app = express();
 const port = 4100;
 
 // Import and use the protected route
-const protectedRoute = require('./v1/routes/protectedRoute');
+const protectedRoute = require('./routes/protectedRoute');
 app.use(cors())
 app.use('/api', protectedRoute);
 

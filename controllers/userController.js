@@ -1,6 +1,6 @@
 // controllers/userController.js
 
-const userModel = require('.v1/models/userModel');
+const userModel = require('./models/userModel');
 
 const userController = {
     async updateUser(req, res) {
