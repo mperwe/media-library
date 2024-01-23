@@ -1,6 +1,6 @@
 // controllers/userController.js
 
-const userModel = require('./models/userModel');
+const userModel = require('../models/userModel');
 
 const userController = {
     async updateUser(req, res) {
@@ -41,6 +41,16 @@ const userController = {
             res.status(500).json({ error: 'An error occurred while deleting the user' });
         }
     },
+
+    async getAllUsers(req, res) {
+        try {
+            const users = await userModel.getUsers()
+            res.json(users);
+        } catch (error) {
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    },
+    
 };
 
 module.exports = userController;

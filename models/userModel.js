@@ -22,6 +22,10 @@ class UserModel {
             where: { id: userId },
         });
     }
+
+    async getUsers(){
+        return await prisma.profile.findMany()
+    }
 }
 
 module.exports = new UserModel();
