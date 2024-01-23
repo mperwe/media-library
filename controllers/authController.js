@@ -1,4 +1,6 @@
 // controllers/authController.js
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
@@ -38,7 +40,10 @@ const authController = {
                 return res.status(400).json({ error: error.details[0].message });
             }
 
+            //Encryption with bcrypt.
             const { username, email, password } = req.body;
+            const salt = await bcrypt.genSalt(saltRounds)
+            const hashedPassword = await bcrypt.hash(password,salt)
             const existingUser = await authModel.getUserByEmail(email);
             if (existingUser) {
                 return res.status(409).json({ error: 'User exists' });
@@ -46,7 +51,7 @@ const authController = {
                 await authModel.createUser({
                     username,
                     email,
-                    password,
+                    password: hashedPassword,
                     role: 'user',
                 });
                 const token = jwt.sign({ email }, `${JWT_SECRET_KEY}`, { expiresIn: '1h' });
