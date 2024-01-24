@@ -7,7 +7,7 @@ const moviesRoute = require('./routes/movieRoute');
 const usersRoute = require('./routes/usersRoute')
 
 const app = express();
-const port = 4100;
+const port = 5100;
 
 // Import and use the protected route
 const protectedRoute = require('./routes/protectedRoute');
