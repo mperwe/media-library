@@ -7,7 +7,7 @@ const moviesRoute = require('./routes/movieRoute');
 const usersRoute = require('./routes/usersRoute')
 
 const app = express();
-const port = 5100;
+const port = 4100;
 
 // Import and use the protected route
 const protectedRoute = require('./routes/protectedRoute');
@@ -18,13 +18,13 @@ app.use('/api', protectedRoute);
 app.use(bodyParser.json());
 
 // Routes
-app.use('/auth', authRoute);
-app.use('/movies', moviesRoute);
-app.use('/users', usersRoute);
+app.use('/api/v1/auth', authRoute);
+app.use('/api/v1/movies', moviesRoute);
+app.use('/api/v1/users', usersRoute);
 
 
 // Welcome Route
-app.get('/', (req, res) => {
+app.get('/api/v1/', (req, res) => {
   res.send('Welcome to the Movie Library!');
 });
 
