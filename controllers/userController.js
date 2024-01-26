@@ -2,6 +2,8 @@
 
 const userModel = require('../models/userModel');
 
+
+
 const userController = {
     async updateUser(req, res) {
         const userId = parseInt(req.params.userId);

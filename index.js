@@ -1,6 +1,9 @@
 // my index.js file
 const express = require('express');
 const cors = require('cors')
+
+
+
 const bodyParser = require('body-parser');
 const authRoute = require('./routes/authRoute');
 const moviesRoute = require('./routes/movieRoute');
