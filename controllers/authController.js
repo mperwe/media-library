@@ -19,9 +19,12 @@ const authController = {
             const users = await authModel.getUsers();
             const { email, password } = req.body;
 
-            const user = users.find((user) => user.email === email && user.password === password);
+            
+            const user = users.find((user) => user.email === email);
+            const valid = await bcrypt.compare(password, user.password);
 
-            if (!user) {
+
+            if (!valid) {
                 return res.status(401).json({ message: 'Invalid credentials' });
             }
 
