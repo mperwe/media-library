@@ -1,6 +1,8 @@
 // my index.js file
 const express = require('express');
 const cors = require('cors')
+const morgan = require('morgan')
+
 
 
 
@@ -14,16 +16,20 @@ const port = 4100;
 
 // Import and use the protected route
 const protectedRoute = require('./routes/protectedRoute');
+
 app.use(cors())
-app.use('/api', protectedRoute);
+
 
 // Middleware
+app.use(morgan('dev'));
 app.use(bodyParser.json());
+
 
 // Routes
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/movies', moviesRoute);
 app.use('/api/v1/users', usersRoute);
+app.use('/api', protectedRoute);
 
 
 // Welcome Route
