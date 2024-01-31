@@ -15,9 +15,9 @@ function authMiddleware(req, res, next) {
     req.user = decoded;
     next();
   } catch (error) {
+      
     res.status(500).json({ message: 'An error ocurred, contact admin support.' });
   }
 }
 
 module.exports = authMiddleware;
-
