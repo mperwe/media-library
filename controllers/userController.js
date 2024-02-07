@@ -1,8 +1,7 @@
 // controllers/userController.js
 
+const { error } = require('console');
 const userModel = require('../models/userModel');
-
-
 
 const userController = {
     async updateUser(req, res) {
@@ -27,9 +26,11 @@ const userController = {
 
     async deleteUser(req, res) {
         const userId = parseInt(req.params.userId);
-
+        console.log(userId)
         try {
             const existingUser = await userModel.getUserById(userId);
+           
+            console.log(existingUser)
 
             if (!existingUser) {
                 return res.status(404).json({ message: 'User not found' });
@@ -39,7 +40,7 @@ const userController = {
 
             res.json({ message: 'User deleted successfully' });
         } catch (error) {
-            console.error(error);
+            console.log(error);
             res.status(500).json({ error: 'An error occurred while deleting the user' });
         }
     },
