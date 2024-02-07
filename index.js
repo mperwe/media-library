@@ -3,11 +3,7 @@ const express = require('express');
 const cors = require('cors')
 //const morgan = require('morgan')
 
-
-
-
 const bodyParser = require('body-parser');
-const authRoute = require('./routes/authRoute');
 const moviesRoute = require('./routes/movieRoute');
 const usersRoute = require('./routes/usersRoute')
 
@@ -26,7 +22,6 @@ app.use(bodyParser.json());
 
 
 // Routes
-app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/movies', moviesRoute);
 app.use('/api/v1/users', usersRoute);
 app.use('/api', protectedRoute);

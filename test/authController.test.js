@@ -55,7 +55,7 @@ describe('authController', () => {
             expect(res.json).toHaveBeenCalledWith({ error: 'An error occurred while logging in' });
         });
     });
-
+            
     describe('registerUser', () => {
         it('should register a new user and return a token', async () => {
             authModel.getUserByEmail.mockResolvedValue(null);
