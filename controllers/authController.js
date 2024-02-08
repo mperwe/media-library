@@ -21,6 +21,7 @@ const authController = {
 
             
             const user = users.find((user) => user.email === email);
+            console.log(user)
             const valid = await bcrypt.compare(password, user.password);
 
 
@@ -31,7 +32,7 @@ const authController = {
             const token = jwt.sign({ email }, `${JWT_SECRET_KEY}`, { expiresIn: '1h' });
             res.json({ token });
         } catch (error) {
-            console.error(error);
+            console.log(error)
             res.status(500).json({ error: 'An error occurred while logging in' });
         }
     },
