@@ -3,7 +3,7 @@ const app = require('../index');
 
 
 describe('login endpoint', () => {
-    test('should return hello world object', async () => {
+    test('test shoul return token', async () => {
       const res = await request(app)
         .post('/api/v1/users/login')
         .send(
@@ -14,4 +14,20 @@ describe('login endpoint', () => {
         )
       expect(res.statusCode).toEqual(200)
     })
+
+    describe('register endpoint', () => {
+      test('test shoul return token', async () => {
+        const res = await request(app)
+          .post('/api/v1/users/signup')
+          .send(
+            {
+              "username": "code25677",
+              "email": "code256777@gmail.com",
+              "password": "code258677"
+          }
+          )
+        expect(res.statusCode).toEqual(201)
+      })
+    })
+
   })
