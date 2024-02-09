@@ -10,16 +10,16 @@ class UserModel {
         });
     }
 
-    async updateUser(userId, userData) {
+    async updateUser(userEmail, userData) {
         return await prisma.profile.update({
-            where: { id: userId },
+            where: { email: userEmail },
             data: userData,
         });
     }
 
-    async deleteUser(userId) {
+    async deleteUser(userEmail) {
         return await prisma.profile.delete({
-            where: { id: userId },
+            where: { email: userEmail },
         });
     }
 
