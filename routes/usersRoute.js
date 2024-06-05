@@ -6,8 +6,8 @@ const authController = require('../controllers/authController');
 const router = express.Router();
 const auth = require("../middleware/authMiddleware");
 
-router.put('/edit/:userId', auth, userController.updateUser);
-router.delete('/delete/:userId', auth, userController.deleteUser);
+router.put('/edit/:userEmail', auth, userController.updateUser);
+router.delete('/delete/:userEmail', auth, userController.deleteUser);
 router.get('/', auth, userController.getAllUsers);
 router.post('/login', authController.loginUser);
 router.post('/signup', authController.registerUser);

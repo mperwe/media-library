@@ -2,20 +2,21 @@
 
 const { error } = require('console');
 const userModel = require('../models/userModel');
+const authModel = require('../models/authModel');
 
 const userController = {
     async updateUser(req, res) {
-        const userId = parseInt(req.params.userId);
+        const userEmail = parseInt(req.params.userEmail);
         const userData = req.body;
 
         try {
-            const existingUser = await userModel.getUserById(userId);
+            const existingUser = await authModel.getUserByEmail(userEmail);
 
             if (!existingUser) {
                 return res.status(404).json({ message: 'User not found' });
             }
 
-            const updatedUser = await userModel.updateUser(userId, userData);
+            const updatedUser = await userModel.updateUser(userEmail, userData);
 
             res.json(updatedUser);
         } catch (error) {
@@ -25,18 +26,15 @@ const userController = {
     },
 
     async deleteUser(req, res) {
-        const userId = parseInt(req.params.userId);
-        console.log(userId)
+        const userEmail = req.params.userEmail
         try {
-            const existingUser = await userModel.getUserById(userId);
+            const existingUser = await authModel.getUserByEmail(userEmail);
            
-            console.log(existingUser)
-
             if (!existingUser) {
                 return res.status(404).json({ message: 'User not found' });
             }
 
-            await userModel.deleteUser(userId);
+            await userModel.deleteUser(userEmail);
 
             res.json({ message: 'User deleted successfully' });
         } catch (error) {
